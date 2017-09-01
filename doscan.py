@@ -63,8 +63,8 @@ class Dropout_Scan:
                     if self.error == 0:
                         print("") # force newline
                         self.error = 1
-                    print ( state["channel"] + " F " + state["first"] + " L " + state["last"] +
-                            " D " + self.sample_to_time( state["count"] ))
+                    print ( state["channel"] + " Start " + state["first"] + " End " + state["last"] +
+                            " Dur " + self.sample_to_time( state["count"] ))
                 state["first"]=None
                 state["last"]=None
                 state["count"] = 0
