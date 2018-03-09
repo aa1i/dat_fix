@@ -17,18 +17,28 @@ The thresh parameter adjusts the threshold number of repeated samples to be cons
 
 ## Workflow
 
+Transfer the recording off the DAT to a wave file on a computer.  It is assumed the user knows how to do this. Use a pure digital transfer. Coaxial S/PDIF is recommended.
+
+  Get multiple takes (2-3+) of the same master tape.  They should be byte-identical except for dropouts, and variable length leader/trailer sections.  The tools currently scan for and ignore the leader region. The trailer may require further work.
+
+### Visualization / Verification
+
 I find it helpful to load the main take into Audacity, then import the corrected file as a second track. using the zoom and "time shift" tools, align the two tracks sample to sample.  You will have to zoom in very close to see the individal samples for the final alignment.
 
   Select the main tack, then Effect/Invert. Select both tracks, then Tracks/Mix and Render to New Track.  The difference track should be mostly zero. If not, undo the mix and render and invert, then re-align the tracks and repeat.
 
   The non-zero portions of the difference will be where the corrections were applied. By selecting a region around the correction and using "solo" you can listen to the corrected and un-corrected audio.
 
+### thresh paramter
+
+Good settings for 44.1 kHz / 48 kHz sources seem to range from 20 to 50 to 100. Lower values mor aggressively correct dropouts.  Settings below 20 tend to generate false positives where the audio data doesn't change much (low amplitude, low frequency?).  Settings above 100 allow too many dropouts through.
+
 # modules
 
 ## get_file_info
 
 ```python
-    def get_file_info( self, file ):
+    def get\_file\_info( self, file ):
         """
         " Get information from wave file header
         " 
@@ -69,7 +79,7 @@ I find it helpful to load the main take into Audacity, then import the corrected
         """
 ```
 
-## scan_file
+## scan\_file
 
 ```python
 def scan_file( self, fname, thresh=100 ):
@@ -91,7 +101,7 @@ def scan_file( self, fname, thresh=100 ):
         """
 ```
 
-## do_scan_and_fill_2
+## do\_scan\_and\_fill\_2
 
 ```python
     def do_scan_and_fill_2( self, file_list, thresh=100 ):
@@ -135,3 +145,5 @@ This is a fast correcting filter using three files, but may not work well if the
 [ ]  tool to compare multiple takes from the same transfer and find the number of samples to shift to align them
 
 [ ]  handle multiple takes/files, align them, detect drop out regions, and fill from takes without dropouts.
+[ ] detect and trim variable length trailer regions
+[ ] add tool to align tracks / calculate the relative shift between takes
