@@ -35,10 +35,10 @@ Good settings for 44.1 kHz / 48 kHz sources seem to range from 20 to 50 to 100. 
 
 # modules
 
-## get_file_info
+## get\_file\_info
 
 ```python
-    def get\_file\_info( self, file ):
+    def get_file_info( self, file ):
         """
         " Get information from wave file header
         " 
@@ -146,4 +146,5 @@ This is a fast correcting filter using three files, but may not work well if the
 
 [ ]  handle multiple takes/files, align them, detect drop out regions, and fill from takes without dropouts.
 [ ] detect and trim variable length trailer regions
+
 [ ] add tool to align tracks / calculate the relative shift between takes
